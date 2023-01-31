@@ -1,0 +1,251 @@
+<div class="main-content">
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" name="recherche" type="ball-pulse">
+        <p style="font-size: 20px; color: white">Veuillez patienter svp...</p>
+    </ngx-spinner>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="background-color: #608cc9" id="menu-titre">
+                <div class="card-header" style="
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+          ">
+                    <h5 class="card-title text-center" style="padding-top: 0 !important; padding-bottom: 0 !important">
+                        Historique demande
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- CONTENU -->
+
+        <!-- TAB MENU -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card card-nav-tabs card-plain">
+                        <div class="card-header card-header-danger">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#menu1" data-toggle="tab">Demande Valides et clotures</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#menu3" data-toggle="tab"
+                        >Historique </a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#menu4" data-toggle="tab"
+                        >Renouvellement </a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="tab-pane active" id="menu1">
+                  <div class="row" >
+                    <div class="col-md-12">
+                      <fieldset>
+                        <legend>
+                          <i class="fa fa-user-plus pr-2"></i>Liste Validé
+                        </legend>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="col-md-12">
+                    <table class="table" style="font-size: 11px">
+                        <thead style="background-color: #eee">
+                            <tr>
+                                <th class="text-left">N° Dossier</th>
+                                <th class="text-left">Id Ouvrage</th>
+                                <th class="text-left">Date Emprunt</th>
+                                <th class="text-left">Date retour</th>
+                                <th class="text-left">Validation</th>
+                                <th class="text-left">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center" style="text-transform: uppercase !important">
+                          <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" name="valide" type="ball-pulse" [fullScreen]="false">
+                            <p style="font-size: 20px; color: white">Veuillez patienter svp...</p>
+                        </ngx-spinner>
+                            <ng-container *ngFor="let item of demandeValide">
+                                <ng-container *ngIf="item.date_retour!=null">
+                                    <tr   >
+                                        <td class="text-left">{{ item.mvt_id }}</td>
+                                        <td class="text-left">{{ item.doc_cote }}</td>
+                                        <td class="text-left">{{ item.date_emprunt }}</td>
+                                        <td class="text-left">{{ item.date_retour }}</td>
+                                        <td *ngIf="item.flag_valide=='O'" class="text-succes text-left">Demande validé</td>
+                                        <td class="text-left">
+                                          <button data-toggle="modal" (click)="setdetails(item)" data-target="#valide" type="button" rel="tooltip"  type="button" rel="tooltip" class="btn btn-cnaps-box-shadow">
+                                            <i class="fa fa-eye pr-2"></i>Détail
+                                          </button>
+                                        </td>
+                                    </tr>
+                                    
+                                </ng-container>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="menu3">
+                  <div class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <legend>
+                          <i class="fa fa-user-plus pr-2"></i>Liste en cours de traitement
+                        </legend>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="col-md-12">
+                    <table class="table" style="font-size: 11px">
+                        <thead style="background-color: #eee">
+                            <tr>
+                                <th class="text-left">N° Dossier</th>
+                                <th class="text-left">Date Emprunt</th>
+                                <th class="text-left">Date prévu retour</th>
+                                <th class="text-left">Observation</th>
+                                <th class="text-left">Validation</th>
+                                <th class="text-left"></th>
+                                <th class="text-left"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center" style="text-transform: uppercase !important">
+                          <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" name="encourTraite" type="ball-pulse" [fullScreen]="false">
+                            <p style="font-size: 20px; color: white">Veuillez patienter svp...</p>
+                        </ngx-spinner>
+                            <ng-container *ngFor="let item of demandeEncours">
+                                <ng-container>
+                                    <tr  >
+                                        <td class="text-left">{{ item.mvt_id }}</td>
+                                        <td class="text-left">{{ item.date_emprunt }}</td>
+                                        <td class="text-left">{{ item.date_retour }}</td>
+                                        <td class="text-warning text-left">Obs</td>
+                                        <td *ngIf="item.flag_valide=='N'"  class="text-warning text-left"> Demande non validé</td>
+                                        <td *ngIf="item.flag_valide=='O'" class="text-succes text-left">Demande validé</td>
+                                        <td class="text-left">
+                                          <button data-toggle="modal" (click)="setdetails(item)"  data-target="#valide" type="button" rel="tooltip"  type="button" rel="tooltip" class="btn btn-cnaps-box-shadow">
+                                            <i class="fa fa-eye pr-2"></i>Détail
+                                          </button>
+                                        </td>
+                                        <td class="text-center">
+                                          <button *ngIf="item.flag_valide=='N'"  type="button" (click)="annuler(item.mvt_id)" class="btn btn-cnaps-error">
+                                            <i class="fa fa-trash-alt pr-2"></i> Annuler
+                                          </button>
+                                        </td>
+                                    </tr>
+                                    
+                                </ng-container>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-1"></div>
+                  </div>
+                </div>
+
+                
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="valide" class="modal fade" role="dialog">
+  <div class="katan">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content p-2">
+              <div class="modal-header">
+                  <h5 class="art-shadow">Details catlogue: </h5>
+                  <button  type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="ico-times" role="img" aria-label="Cancel"></i></button>
+              </div>
+              <div class="modal-header">
+              </div>
+              <div class="modal-content p-2">
+                  <div class="row">
+                    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" name="details" type="ball-pulse" [fullScreen]="false">
+                    </ngx-spinner>
+                      <div class="col-md-12 mt-2">
+                          <div class="form-row" *ngIf="details?.doc_TITRE!=null" >
+                            <div class="col-md-12">
+                              <label class="text-info">Titre</label>
+                              <input type="text" value="{{ details?.doc_TITRE }}" class="form-control text-uppercase text-center" disabled />
+                              
+                              </div>
+                          </div>
+                          <div class="form-row" *ngIf="details?.doc_SOUS_TITRE!=null" >
+                            <div class="col-md-12">
+                              <label class="text-info">Sous titre</label>
+                              <input type="text" value="{{ details?.doc_SOUS_TITRE }}" class="form-control text-uppercase text-center" disabled />
+                              </div>
+                          </div>
+                          <div class="form-row" *ngIf="details?.doc_CATALOGAGE!=null" >
+                            <div class="col-md-12">
+                              <label class="text-info">Catlogue</label>
+                              <input type="text" value="{{ details?.doc_CATALOGAGE }}" class="form-control text-uppercase text-center" disabled />
+                              </div>
+                          </div>
+                          <div class="form-row" *ngIf="details?.mvt_DATE_EMPRUNT!=null"  >
+                            <div class="col-md-12">
+                              <label class="text-info">Date emprunt</label>
+                              <input type="text"  value="{{ details?.mvt_DATE_EMPRUNT }}" class="form-control text-uppercase text-center" disabled />
+                              </div>
+                          </div>
+                          <div class="form-row" *ngIf="details?.mvt_DATE_RETOUR!=null"  >
+                            <div class="col-md-12">
+                              <label class="text-info">Date retour</label>
+                              <input type="text"  value="{{ details?.mvt_DATE_RETOUR }}" class="form-control text-uppercase text-center" disabled />
+                              </div>
+                          </div>
+                          <div class="form-row" *ngIf="details?.flag_VALIDE!=null"  >
+                            <div class="col-md-12">
+                              <label class="text-info">Observation</label>
+                              <input type="text" *ngIf="details?.flag_VALIDE=='O'"   value="Demande validé" class="form-control text-uppercase text-center" disabled />
+                              <input type="text-warning" *ngIf="details?.flag_VALIDE=='N'" value="Demande en cours" class="form-control text-uppercase text-center" disabled />
+                              </div>
+                          </div>
+                          <div class="from-row">
+                            <div class="col-md-12">
+                              <div class="modal-footer justify-content-center">
+                                <button *ngIf="details?.flag_VALIDE=='O'" (click)="renouvellercomp(details)" type="button" class="btn btn-cnaps-save">Renouveler</button>
+                            </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn btn-warning" data-dismiss="modal">FERMER</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <!-- <calogueDetails-item [nombreExemplaire]="nombreExemplaire" [catalogue]="cataloguesDetails"></calogueDetails-item> -->
+</div>

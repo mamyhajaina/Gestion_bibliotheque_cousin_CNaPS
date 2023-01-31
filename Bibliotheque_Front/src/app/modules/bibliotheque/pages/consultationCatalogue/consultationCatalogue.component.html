@@ -1,0 +1,322 @@
+<div class="main-content">
+    <ngx-spinner [fullScreen]="false" bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" name="recherche" type="ball-pulse">
+        <p style="font-size: 20px; color: white">Veuillez patienter svp...</p>
+    </ngx-spinner>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="background-color: #608cc9" id="menu-titre">
+                <div class="card-header" style="
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+          ">
+                    <h5 class="card-title text-center" style="padding-top: 0 !important; padding-bottom: 0 !important">
+                        Consultation des catalogues
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <fieldset>
+                        <!-- <legend id="legend">
+                            <i class="fa fa-save pr-2"></i> Information
+                        </legend> -->
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label class="text-info">Matricule</label>
+                                <input type="text" class="form-control text-uppercase" placeholder="{{ user?.matricule }}" disabled />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="text-info">Service</label>
+                                <input type="text" class="form-control text-uppercase" placeholder="{{ user?.service }}" disabled />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="text-info">Direction</label>
+                                <input type="text" class="form-control text-uppercase" placeholder="{{ user?.direction }}" disabled />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="text-info">Date et heure</label>
+                                <p><time datetime="2001-05-15T19:00">le 15 mai</time>.</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <fieldset>
+                        <legend id="legend"><i class="fa fa-save pr-2"></i> Filtre</legend>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="text-info">Valeur</label>
+                                <input [(ngModel)]="search" (ngModelChange)="searchCatlogue()" type="text" class="form-control text-uppercase" placeholder="Text....." />
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngFor="
+      let catalogue of cataloguesliste
+        | paginate
+          : {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            };
+      let i = index
+    ">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-body">
+                    <fieldset>
+                        <legend id="legend">
+                            <i class="fa fa-save pr-2"></i> Cote: {{ catalogue.doc_cote }}
+                        </legend>
+                        <div class="modal-header">
+                            <h5 class="art-shadow">
+                                Details catlogue: {{ catalogue.doc_titre }}
+                            </h5>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12 text-center">
+                                <h6>{{ catalogue.doc_sous_titre }}</h6>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12 text-center">
+                                <h6>Resume</h6>
+                                <p class="text-muted">
+                                    {{ catalogue.doc_resume }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td class="text-left">Auteur:</td>
+                                            <td class="text-muted">{{ catalogue.doc_editeur }}</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td class="text-left">Nombre des pages:</td>
+                                            <td class="text-muted">
+                                                {{ catalogue.doc_nombre_page }}
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-5"></div>
+                            <div class="form-group col-md-2">
+                                <!-- <button class="btn rond1" data-toggle="modal" data-target="#confirm"><i class="fas fa-question"></i></button> -->
+                                <button (click)="setCatlogueDetails(catalogue)" data-toggle="modal" data-target="#confirm" type="button" rel="tooltip" class="btn btn-cnaps-box-shadow btn-lg btn-block btn-sm">
+                  <i class="fa fa-save pr-2"></i>Details
+                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+    </pagination-controls>
+</div>
+
+<div id="confirm" class="modal fade" role="dialog">
+    <div class="katan">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content p-2">
+                <div class="modal-header">
+                    <h5 class="art-shadow">Details catlogue: {{ cataloguesDetails.doc_cote }} </h5>
+                    <button  type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="ico-times" role="img" aria-label="Cancel"></i></button>
+                </div>
+                <div class="modal-header">
+                    <h5 class="{{ textDispo }}">
+                        <ngx-spinner [fullScreen]="false" bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" name="dispos" type="ball-pulse">
+                            <p style="font-size: 20px; color: white">Veuillez patienter svp...</p>
+                        </ngx-spinner>
+                        {{ texteDispovalue }}
+                    </h5>
+                    <button (click)="saveDemande()" type="button" rel="tooltip" type="button" rel="tooltip" class="btn btn-cnaps-save btn-sm {{ buttonDemande }}" >
+                        Demander
+                    </button>
+    
+                    <!-- <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div> -->
+                </div>
+                <div class="modal-content p-2">
+                    <div class="row">
+                        <div class="col-md-12 mt-2">
+                            <fieldset>
+                                <div class="form-row" *ngIf="cataloguesDetails.doc_sous_titre!=null">
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            Titre:
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <input type="text"  value="{{ cataloguesDetails.doc_titre }}" class="form-control text-uppercase text-center" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-row" *ngIf="cataloguesDetails.doc_sous_titre!=null" >
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            SOUS-TITRE:
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="text"  value="{{ cataloguesDetails.doc_sous_titre }}" class="form-control text-uppercase text-center" disabled />
+                                        <p>
+                                            {{ cataloguesDetails.doc_sous_titre }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-row" *ngIf="cataloguesDetails.doc_sous_titre!=null">
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            AUTEUR:
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="text"  value="{{ cataloguesDetails.doc_sous_titre }}" class="form-control text-uppercase text-center" disabled />
+                                        <p>
+                                            {{ cataloguesDetails.doc_sous_titre }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- <div class="form-row">
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            CO-AUTEUR:
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <p>
+                                            tsy hita
+                                        </p>
+                                    </div>
+                                </div> -->
+                                <div class="form-row" *ngIf="cataloguesDetails.doc_nombre_page!=null">
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            NOMBRE DES PAGES :
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <input type="text"  value="{{ cataloguesDetails.doc_nombre_page }}" class="form-control text-uppercase text-center" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-row" *ngIf="nombreExemplaire!=null">
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            NOMBRE DES EXEMPLAIRES :
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <input type="text"  value="{{ nombreExemplaire }}" class="form-control text-uppercase text-center" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-row" *ngIf="cataloguesDetails.doc_volume!=null">
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            VOLUME :
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <input type="text"  value="{{ cataloguesDetails.doc_volume }}" class="form-control text-uppercase text-center" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-row" *ngIf="cataloguesDetails.doc_editeur!=null">
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            EDITEUR :
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <input type="text"  value="{{ cataloguesDetails.doc_editeur }}" class="form-control text-uppercase text-center" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-row" *ngIf="cataloguesDetails.doc_date_edition!=null">
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            DATE D'EDITION :
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <input type="text"  value="{{ cataloguesDetails.doc_date_edition }}" class="form-control text-uppercase text-center" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-row" *ngIf="cataloguesDetails.doc_lieu_edition!=null">
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            LIEU D'EDITION :
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <input type="text"  value="{{ cataloguesDetails.doc_lieu_edition }}" class="form-control text-uppercase text-center" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-row" *ngIf="cataloguesDetails.doc_numero_edition!=null">
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            NUMERO D'EDITION :
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <input type="text"  value="{{ cataloguesDetails.doc_numero_edition }}" class="form-control text-uppercase text-center" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-row" *ngIf="cataloguesDetails.doc_isbn_issn!=null">
+                                    <div class="form-group col-md-2">
+                                        <legend>
+                                            NUMERO ISBN/ISSN :
+                                        </legend>
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <input type="text"  value="{{ cataloguesDetails.doc_isbn_issn }}" class="form-control text-uppercase text-center" disabled />
+                                    </div>
+                                </div>
+    
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">FERMER</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <calogueDetails-item [nombreExemplaire]="nombreExemplaire" [catalogue]="cataloguesDetails"></calogueDetails-item> -->
+</div>

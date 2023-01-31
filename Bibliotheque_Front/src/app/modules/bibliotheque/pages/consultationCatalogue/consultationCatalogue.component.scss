@@ -1,0 +1,67 @@
+time {
+    font-weight: bold;
+}
+
+#sectionhover {
+    color: #000;
+    font-size: 11px;
+}
+
+#sectionhover:hover {
+    cursor: pointer;
+    color: #608CC9;
+}
+
+legend {
+    border: 1px solid #2c4393 !important;
+    background-color: #2c4393 !important;
+    color: white;
+}
+
+strong {
+    text-align: left;
+}
+
+input.katan {
+    color: #2c4393;
+}
+
+.ico-times:before {
+    content: "\2716";
+}
+
+.modal-title-katan h4 {
+    text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0, 0, 0, 0.15);
+}
+
+
+.choose::-webkit-file-upload-button {
+    color: white;
+    display: inline-block;
+    background: #1CB6E0;
+    border: none;
+    padding: 7px 15px;
+    font-weight: 700;
+    border-radius: 3px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 10pt;
+}
+
+div.rond1 {
+    text-align: center;
+}
+
+
+.katan {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0;
+    padding: 0;
+}
+
+.modal-content {
+    height: auto;
+    min-height: 100%;
+    border-radius: 0;
+}

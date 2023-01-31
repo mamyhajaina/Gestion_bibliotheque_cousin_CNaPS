@@ -1,0 +1,197 @@
+<div class="katan">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content p-2">
+            <div class="modal-header">
+                <h5 class="art-shadow">Details catlogue: {{ catalogue.doc_cote }} </h5>
+                <button  type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="ico-times" role="img" aria-label="Cancel"></i></button>
+            </div>
+            <div class="modal-header">
+                <h5 class="{{ textDispo }}">
+                    DISPONIBLE TOU DE SUITE
+                </h5>
+                <button type="button" rel="tooltip" type="button" rel="tooltip" class="btn btn-cnaps-save btn-sm" (click)="saveDemande()">
+                    Demander
+                </button>
+
+                <!-- <div class="row">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div> -->
+            </div>
+            <div class="modal-content p-2">
+                <div class="row">
+                    <div class="col-md-12 mt-2">
+                        <fieldset>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        Titre:
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <p>
+                                        {{ catalogue.doc_titre }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        SOUS-TITRE:
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p>
+                                        {{ catalogue.doc_sous_titre }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        AUTEUR:
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p>
+                                        {{ catalogue.doc_sous_titre }}
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        CO-AUTEUR:
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p>
+                                        tsy hita
+                                    </p>
+                                </div>
+                            </div> -->
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        NOMBRE DES PAGES :
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p>
+                                        {{ catalogue.doc_nombre_page }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        NOMBRE DES EXEMPLAIRES :
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p>
+                                        {{ nombreExemplaire }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        VOLUME :
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p>
+                                        {{ catalogue.doc_volume }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        EDITEUR :
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p>
+                                        {{ catalogue.doc_editeur }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        DATE D'EDITION :
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p>
+                                        {{ catalogue.doc_date_edition }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        LIEU D'EDITION :
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p>
+                                        {{ catalogue.doc_lieu_edition }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        NUMERO D'EDITION :
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p>
+                                        {{ catalogue.doc_numero_edition }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <legend>
+                                        NUMERO ISBN/ISSN :
+                                    </legend>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p>
+                                        {{ catalogue.doc_isbn_issn }}
+                                    </p>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="modal-content mt-2 p-2">
+                <div class="row">
+                    <div class="col-md-12 mt-2">
+                        <fieldset>
+                            <div class="form-row">
+                                <div class="col-md-4">
+
+                                </div>
+                                
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+            </div> -->
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">FERMER</button>
+            </div>
+        </div>
+    </div>
+</div>
