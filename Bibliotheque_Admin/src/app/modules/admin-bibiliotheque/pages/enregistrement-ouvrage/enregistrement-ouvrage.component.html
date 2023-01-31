@@ -1,0 +1,216 @@
+<div class="main-content">
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="card" style="background-color: #608cc9" id="menu-titre">
+            <div class="card-header" style="
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+      ">
+                <h5 class="card-title text-center" style="padding-top: 0 !important; padding-bottom: 0 !important">
+                  Enregistrement des ouvrages
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row">
+      <!-- TABLEAU / LIST -->
+  
+      <!-- CONTENU -->
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <fieldset>
+              <legend id="legend">
+                <i class="fa fa-save pr-2"></i> Ouvrage
+              </legend>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label class="text-info">Titre</label>
+                  <input
+                  [(ngModel)]="ouvrage.doc_titre"
+                    type="text"
+                    class="form-control text-uppercase"
+                    placeholder="Titre ........."
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label class="text-info">Sous Titre</label>
+                  <input
+                  [(ngModel)]="ouvrage.doc_sous_titre"
+                    type="text"
+                    class="form-control text-uppercase"
+                    placeholder="Sous titre ........"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label class="text-info">Thème</label>
+                  <select [(ngModel)]="ouvrage.theme_code" name="theme" class="custom-select text-uppercase" style="font-size: 15px; color:gray;" required>
+                    <option  *ngFor="let item of theme" [value]="item.theme_Code" >{{ item?.theme_libelle}}</option>
+                </select>
+                <ngx-spinner bdColor="rgba(255,255,255,0.7)"
+                    size="small" color="#231ad4"
+                    type="ball-rotate" [fullScreen]="false"
+                    name="theme">
+                </ngx-spinner>
+                </div>
+                <div class="col-md-6">
+                  <label class="text-info">Type</label>
+                  <select [(ngModel)]="ouvrage.type_code" name="theme" class="custom-select text-uppercase" style="font-size: 15px; color:gray;" required>
+                    <option  *ngFor="let item of type" [value]="item.type_Code" >{{ item?.type_document}}</option>
+                  </select>
+                  <ngx-spinner bdColor="rgba(255,255,255,0.7)"
+                    size="small" color="#231ad4"
+                    type="ball-rotate" [fullScreen]="false"
+                    name="type">
+                </ngx-spinner>
+                </div>
+
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label class="text-info">Auteur</label>
+                  <select [(ngModel)]="auteurSave"  name="theme" class="custom-select text-uppercase" style="font-size: 15px; color:gray;" required>
+                    <option  *ngFor="let item of auteur" [ngValue]="item" >{{ item?.aut_nom}}</option>
+                </select>
+                <ngx-spinner bdColor="rgba(255,255,255,0.7)"
+                    size="small" color="#231ad4"
+                    type="ball-rotate" [fullScreen]="false"
+                    name="auteurspinner">
+                </ngx-spinner>
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="text-info">N°ISBN/ISSN</label>
+                  <input
+                    type="text"
+                    class="form-control text-uppercase"
+                    placeholder="N°ISBN/ISSN ... mbola tsy hita"
+                  />
+                </div>
+
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label class="text-info">Nombre de page</label>
+                  <input
+                  [(ngModel)]="ouvrage.doc_nombre_page"
+                    type="number"
+                    class="form-control text-uppercase"
+                    placeholder="EX: 50"
+                  />
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="text-info">N°VOLUME</label>
+                  <input
+                  [(ngModel)]="ouvrage.doc_volume"
+                    type="number"
+                    class="form-control text-uppercase"
+                    placeholder="EX: 1"
+                  />
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="text-info">Nombre d’exemplaire</label>
+                  <input
+                  [(ngModel)]="ouvrage.doc_quantite"
+                    type="number"
+                    class="form-control text-uppercase"
+                    placeholder="EX: 2"
+                  />
+                </div>
+                
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label class="text-info">N°édition</label>
+                  <input
+                  
+                    type="number"
+                    class="form-control text-uppercase"
+                    placeholder="EX: 1 mbola tsy hita"
+                  />
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="text-info">Lieu d’édition</label>
+                  <input
+                  [(ngModel)]="ouvrage.doc_lieu_edition"
+                    type="text"
+                    class="form-control text-uppercase"
+                    placeholder="Lieu d’édition..."
+                  />
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="text-info">Année d’édition</label>
+                  <input
+                  [(ngModel)]="ouvrage.doc_date_edition"
+                    type="number"
+                    class="form-control text-uppercase"
+                    placeholder="EX: 2010"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label class="text-info">Editeur</label>
+                  <input
+                  [(ngModel)]="ouvrage.doc_editeur"
+                    type="text"
+                    class="form-control text-uppercase"
+                    placeholder="Nom éditeur ..."
+                  />
+                </div>
+
+              </div>
+              <div class="form-row">
+                
+                
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label class="text-info">Résumé</label>
+                  <textarea 
+                  [(ngModel)]="ouvrage.doc_resume"
+                    name="textarea"
+                    rows="5" cols="30"
+                    placeholder="Votre résumé ...."
+                  ></textarea>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-4">
+
+                </div>
+                <div class="form-group col-md-4">
+                  <button
+                  type="button"
+                  rel="tooltip"
+                  class="btn btn-cnaps-save btn-block"
+                  (click)="enregistrement()"
+                >
+                <i class="fa fa-save pr-2"></i> Enregistrer
+                </button>
+                <ngx-spinner bdColor="rgba(255,255,255,0.7)"
+                    size="small" color="#231ad4"
+                    type="ball-rotate" [fullScreen]="false"
+                    name="search">
+                </ngx-spinner>
+                </div>
+              </div>
+            </fieldset>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="auteur" class="modal fade" role="dialog">
+    <app-Auteur_ajout></app-Auteur_ajout>
+</div>
+  

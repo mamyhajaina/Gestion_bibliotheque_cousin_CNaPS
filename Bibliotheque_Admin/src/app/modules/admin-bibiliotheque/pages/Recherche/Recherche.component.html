@@ -1,0 +1,178 @@
+<div class="main-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="background-color: #608cc9" id="menu-titre">
+                <div class="card-header" style="
+              padding-top: 0 !important;
+              padding-bottom: 0 !important;
+              color: #fff;
+              font-weight: bold;
+              text-transform: uppercase;
+            ">
+                    <h5 class="card-title text-center" style="padding-top: 0 !important; padding-bottom: 0 !important">
+                        Consultation des catalogues
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <fieldset>
+                        <!-- <legend id="legend">
+                          <i class="fa fa-save pr-2"></i> Information
+                      </legend> -->
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label class="text-info">Matricule</label>
+                                <input type="text" class="form-control text-uppercase" placeholder="{{ user?.matricule}}" disabled/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="text-info">Service</label>
+                                <input type="text" class="form-control text-uppercase" placeholder="{{ user?.service }}" disabled/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="text-info">Direction</label>
+                                <input type="text" class="form-control text-uppercase" placeholder="{{ user?.direction }}" disabled />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="text-info">Date et heure</label>
+                                <p> <time datetime="2001-05-15T19:00">le 15 mai</time>.</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <fieldset>
+                        <legend id="legend">
+                            <i class="fa fa-save pr-2"></i> Recherche
+                        </legend>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="text-info">Theme</label>
+                                <select name="theme" class="custom-select text-uppercase" style="font-size: 15px; color:gray;" required>
+                                  <option  *ngFor="let item of theme" value="{{ item.theme_cote }}" >{{ item.theme_libelle }}</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="text-info">Champs</label>
+                                <select name="" class="custom-select text-uppercase" value="" style="font-size: 15px; color:gray;" required>
+                                <option *ngFor="let item of colone">{{ item }}</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="text-info">Valeur</label>
+                                <input type="text" class="form-control text-uppercase" placeholder="Text....." />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button type="button" rel="tooltip" class="btn btn-cnaps-box-shadow btn-lg btn-block btn-sm" (click)="recherche()">
+                            <i class=""></i>Rechercher
+                          </button>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <button type="button" rel="tooltip" (click)="getAllCatalogue()" class="btn btn-cnaps-box-save btn-lg btn-block btn-sm">
+                          <i class=""></i>Afficher tout
+                        </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6" *ngFor="let catalogue of catalogues | paginate
+      : {
+          itemsPerPage: tableSize,
+          currentPage: page,
+          totalItems: count
+        };
+  let i = index">
+            <div class="card">
+                <div class="card-body">
+                    <fieldset>
+                        <legend id="legend">
+                            <i class="fa fa-save pr-2"></i> Cote: {{ catalogue.doc_cote }}
+                        </legend>
+                        <div class="modal-header">
+                            <h5 class="art-shadow">
+                                Details catlogue: {{ catalogue.doc_titre }}
+                            </h5>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12 text-center">
+                                <h6>{{ catalogue.doc_sous_titre }}</h6>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12 text-center">
+                                <h6>Resume</h6>
+                                <p class="text-muted">
+                                    {{ catalogue.doc_resume }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td class="text-left">Auteur:</td>
+                                            <td class="text-muted">{{ catalogue.doc_editeur }}</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td class="text-left">Nombre des pages:</td>
+                                            <td class="text-muted">
+                                                {{ catalogue.doc_nombre_page }}
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-5"></div>
+                            <div class="form-group col-md-2">
+                                <!-- <button class="btn rond1" data-toggle="modal" data-target="#confirm"><i class="fas fa-question"></i></button> -->
+                                <button data-toggle="modal" data-target="#confirm" type="button" rel="tooltip" class="btn btn-cnaps-box-shadow btn-lg btn-block btn-sm">
+                  <i class="fa fa-save pr-2"></i>Details
+                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+        <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+        </pagination-controls>
+
+
+    </div>
+</div>
